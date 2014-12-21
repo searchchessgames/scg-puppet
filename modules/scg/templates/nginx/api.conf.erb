@@ -1,0 +1,38 @@
+map $uri $apiEnvironment {
+    default app.php;
+    ~app_dev app_dev.php;
+}
+
+server {
+    server_name             api.<%= @baseHost %>;
+    listen                  80;
+    root                    /home/scg/project/api/current/web;
+    index                   app.php;
+    client_max_body_size    10m;
+    server_tokens           off;
+    dav_methods             PUT DELETE;
+    error_log               /home/scg/logs/api-error.log error;
+    fastcgi_buffers         16 16k;
+    fastcgi_buffer_size     64k;
+
+    location / {
+        if ($request_method = 'OPTIONS') {
+            add_header      'Access-Control-Allow-Origin' '*';
+            add_header      'Access-Control-Allow-Credentials' 'true';
+            add_header      'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';
+            add_header      'Access-Control-Allow-Headers' 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Accept';
+            add_header      'Access-Control-Max-Age' 1728000;
+            add_header      'Content-Type' 'text/plain charset=UTF-8';
+            add_header      'Content-Length' 0;
+            return 204;
+        }
+
+        fastcgi_pass        unix:/var/run/php5-fpm.sock;
+        include             fastcgi_params;
+        fastcgi_param       SCRIPT_FILENAME         $document_root/$apiEnvironment;
+        fastcgi_param       SERVER_NAME             $host;
+        add_header          X-Frame-Options        "deny";
+        add_header          X-XSS-Protection       "1; mode=block";
+        add_header          X-Content-Type-Options "nosniff";
+    }
+}
