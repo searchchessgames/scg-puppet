@@ -20,4 +20,5 @@ node default  {
 
     include scg::base
     include scg::api
+    include scg::frontend
 }
