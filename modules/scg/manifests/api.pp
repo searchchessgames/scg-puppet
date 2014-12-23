@@ -19,15 +19,10 @@ class scg::api {
         ],
     }
 
-    file { '/home/scg/project/api/current/var/cache':
+    file { ['/home/scg/project/api/current/var/cache', '/home/scg/project/api/current/var/logs']:
         mode    => '0777',
-        require => [
-            Exec['Install API - git clone'],
-        ],
-    }
-
-    file { '/home/scg/project/api/current/var/logs':
-        mode    => '0777',
+        owner   => 'scg',
+        group   => 'scg',
         require => [
             Exec['Install API - git clone'],
         ],
