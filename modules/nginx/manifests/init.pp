@@ -1,3 +1,4 @@
+# Manages Nginx.
 class nginx {
     package { 'nginx':
         ensure => present,
@@ -9,8 +10,8 @@ class nginx {
     }
 
     service { 'nginx':
-        enable  => true,
         ensure  => running,
+        enable  => true,
         require => [
             Package['nginx'],
             Package['apache2'],

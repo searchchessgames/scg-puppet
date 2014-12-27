@@ -36,7 +36,7 @@ class scg::api {
         command => 'php composer.phar install --no-scripts --optimize-autoloader',
         cwd     => '/home/scg/project/api/current',
         creates => '/home/scg/project/api/current/vendor/autoload.php',
-        environment => "COMPOSER_HOME=/home/scg/.composer",
+        environment => 'COMPOSER_HOME=/home/scg/.composer',
         require => [
             Exec['Install API - git clone'],
             Exec['Install API - get Composer'],

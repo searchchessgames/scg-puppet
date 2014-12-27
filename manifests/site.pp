@@ -1,5 +1,5 @@
 Exec {
-    path => "/bin:/usr/bin"
+    path => '/bin:/usr/bin'
 }
 
 if $::hostname =~ /.*\.prod$/ {

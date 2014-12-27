@@ -1,3 +1,4 @@
+# Setup an Nginx config file.
 define nginx::website($template) {
     file { "/etc/nginx/sites-enabled/${name}.conf":
         content => template($template),
