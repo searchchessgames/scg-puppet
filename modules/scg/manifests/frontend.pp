@@ -1,12 +1,7 @@
 # Install the frontend application.
 class scg::frontend {
-    file { '/etc/nginx/sites-enabled/scg-frontend.conf':
-        content => template('scg/nginx/frontend.conf.erb'),
-        owner   => root,
-        group   => root,
-        mode    => '0644',
-        require => Package['nginx'],
-        notify  => Service['nginx'],
+    nginx::website { 'scg-frontend':
+        template => 'nginx/frontend.conf.erb',
     }
 
     exec { 'Install web frontend - git clone':

@@ -1,2 +1,2 @@
-sudo puppet apply /home/scg/puppet/manifests/init.pp \
+sudo puppet apply /home/scg/puppet/manifests/site.pp \
     --modulepath /home/scg/puppet/modules/ $*

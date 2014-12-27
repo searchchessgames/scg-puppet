@@ -1,20 +1,12 @@
 # Base setup.
 class scg::base {
-    package { ['git',
-           'nginx',]:
+    package { ['git']:
         ensure => present,
-    }
-
-    service { 'nginx':
-        enable  => true,
-        ensure  => running,
-        require => [
-            Package['nginx'],
-        ],
     }
 
     user { 'scg':
         ensure     => present,
+        comment    => 'searchchessgames.com',
         managehome => true,
     }
 

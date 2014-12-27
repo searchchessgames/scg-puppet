@@ -1,12 +1,7 @@
 # Install the API application.
 class scg::api {
-    file { '/etc/nginx/sites-enabled/scg-api.conf':
-        content => template('scg/nginx/api.conf.erb'),
-        owner   => root,
-        group   => root,
-        mode    => '0644',
-        require => Package['nginx'],
-        notify  => Service['nginx'],
+    nginx::website { 'scg-api':
+        template => 'nginx/api.conf.erb',
     }
 
     exec { 'Install API - git clone':
