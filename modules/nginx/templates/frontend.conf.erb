@@ -7,16 +7,21 @@ server {
     client_max_body_size    20k;
     server_tokens           off;
     access_log              off;
+    error_log               /home/scg/logs/frontend-error.log error;
 
     if ($request_method != "GET" ) {
         return 405;
     }
 
-    location ~ ^/(views|images|js|css) {
-        rewrite ^(.*)$ $1 break;
+    location ~ ^/$ {
+        rewrite ^ /base.html break;
     }
 
-    location ~ ^.? {
-        rewrite ^ /views/index.html break;
+    location ~ \.html$ {
+        rewrite ^(.+)$ $1 break;
+    }
+
+    location ~ ^/(search|game) {
+        rewrite ^ /base.html break;
     }
 }
