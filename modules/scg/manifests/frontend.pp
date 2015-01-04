@@ -4,6 +4,10 @@ class scg::frontend {
         template => 'nginx/frontend.conf.erb',
     }
 
+    nginx::website { 'scg-www-redirect':
+        template => 'nginx/www.conf.erb',
+    }
+
     exec { 'Install web frontend - git clone':
         command => 'git clone https://github.com/searchchessgames/scg-web-frontend.git frontend/current',
         cwd     => '/home/scg/project',

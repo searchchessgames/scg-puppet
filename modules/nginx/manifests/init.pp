@@ -9,6 +9,16 @@ class nginx {
         ensure => absent,
     }
 
+    file { '/etc/nginx/sites-enabled/default':
+        ensure  => absent,
+        require => [
+            Package['nginx'],
+        ],
+        notify => [
+            Service['nginx'],
+        ]
+    }
+
     service { 'nginx':
         ensure  => running,
         enable  => true,

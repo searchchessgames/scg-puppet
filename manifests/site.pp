@@ -2,9 +2,9 @@ Exec {
     path => '/bin:/usr/bin'
 }
 
-if $::hostname =~ /.*\.prod$/ {
+if $::fqdn =~ /.*\.prod$/ {
     $serverEnv = 'prod'
-} elsif $::hostname =~ /.*\.dev$/ {
+} elsif $::fqdn =~ /.*\.dev$/ {
     $serverEnv = 'dev'
 } else {
     $serverEnv = 'dev'

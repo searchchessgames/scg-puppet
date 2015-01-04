@@ -1,0 +1,7 @@
+# This file is managed by Puppet - all changes will be overwritten.
+
+server {
+    server_name             www.<%= @baseHost %>;
+    listen                  80;
+    rewrite                 ^ http://<%= @baseHost %>$request_uri? permanent;
+}
